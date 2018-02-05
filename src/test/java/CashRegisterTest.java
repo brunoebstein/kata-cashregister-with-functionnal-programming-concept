@@ -14,8 +14,19 @@ public class CashRegisterTest {
     public void should_calculate_the_total_price_by_quantity(double price, double quantity, double totalExpected) {
         CashRegister cashRegister = new CashRegister();
 
-        double total = cashRegister.total(price,quantity);
+        Price total = cashRegister.total(Price.valueOf(price), quantity);
 
-        assertThat(total).isEqualTo(totalExpected);
+        assertThat(total).isEqualTo(Price.valueOf(totalExpected));
     }
+/*
+    @Test
+    public void should_calculate_the_total_price_with_Price_by_quantity() {
+        CashRegister cashRegister = new CashRegister();
+        Price price = new Price(1.20);
+        Quantity quantity = 1;
+
+        Price total = cashRegister.total(price, quantity);
+
+        assertThat(total).isEqualTo(new Price(1.20));
+    }*/
 }
