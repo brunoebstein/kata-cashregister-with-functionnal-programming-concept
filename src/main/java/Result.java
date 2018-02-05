@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Result {
+public abstract class Result {
     public static Result found(Price price) {
         return new Found(price);
     }
