@@ -9,6 +9,7 @@ public class CashRegisterTest {
     @CsvSource({
             "1.20,1,1.20",
             "1.42,1,1.42",
+            "1.60,2,3.20",
     })
     public void should_calculate_the_total_price_by_quantity(double price, double quantity, double totalExpected) {
         CashRegister cashRegister = new CashRegister();
