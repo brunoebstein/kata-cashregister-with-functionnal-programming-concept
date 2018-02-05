@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Stream;
 
 public class PriceQuery {
     private final Item[] items;
@@ -8,13 +10,11 @@ public class PriceQuery {
     }
 
     public Result findPrice(String itemCode) {
-        for (Item item : items) {
-
-            if(item.hasItemCode(itemCode)) {
-                return Result.found(item.getUnitPrice());
-            }
-
-        }
-        return Result.notFound(itemCode);
+        return Stream.of(items)
+                .filter(item -> item.hasItemCode(itemCode))
+                .map(Item::getUnitPrice)
+                .map(Result::found)
+                .findFirst()
+                    .orElseGet(()->Result.notFound(itemCode));
     }
 }

@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 public abstract class Result {
     public static Result found(Price price) {
@@ -8,6 +9,8 @@ public abstract class Result {
     public static Result notFound(String itemCode) {
         return new NotFound(itemCode);
     }
+
+    abstract Result map(UnaryOperator<Price> f);
 
     private static class Found extends Result {
         private final Price price;
@@ -27,6 +30,11 @@ public abstract class Result {
         @Override
         public int hashCode() {
             return Objects.hash(price);
+        }
+
+        @Override
+        Result map(UnaryOperator<Price> f) {
+            return found(f.apply(price));
         }
     }
 
@@ -51,6 +59,11 @@ public abstract class Result {
         public int hashCode() {
 
             return Objects.hash(itemCode);
+        }
+
+        @Override
+        Result map(UnaryOperator<Price> f) {
+            return this;
         }
     }
 }
