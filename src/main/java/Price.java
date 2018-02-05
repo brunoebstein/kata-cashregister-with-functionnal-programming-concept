@@ -11,8 +11,8 @@ public class Price {
         this.value = value;
     }
 
-    public Price multiplyBy(double multiplier) {
-        return valueOf(value * multiplier);
+    public Price multiplyBy(Quantity quantity) {
+        return valueOf(quantity.multiplyBy(value));
     }
 
     @Override
